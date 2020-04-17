@@ -12,9 +12,22 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        ConnectionManager().setBaseUrl(url: HttpLink.photos.UrlValue)
+            .setMethod(method: .get)
+            .setBodyParameter(parameter: ServiceHelper().getParameters())
+            .sendRequest { (response) in
+                
+                switch response {
+                case .success(let data):
+                    do {
+                        let responseModel = try JSONDecoder().decode(PhotosModel.self, from: data)
+                        print(responseModel)
+                    } catch { print(error) }
+                    
+                case .failure(let error): print(error)
+                }
+        }
     }
-
-
 }
 
