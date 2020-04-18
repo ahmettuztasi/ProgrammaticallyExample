@@ -20,10 +20,3 @@ class ServiceHelper {
             .createParameters()
     }
 }
-/// this enum used for return data or error when get response from service. It used in closure(callback)
-/// - success returning value
-/// - failure returning error
-public enum Response<Value> {
-    case success(Value)
-    case failure(Error)
-}
